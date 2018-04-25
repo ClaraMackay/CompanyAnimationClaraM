@@ -2,12 +2,15 @@
 --
 -- splash_screen.lua
 -- Created by: Clara Mackay
--- Date: April 18, 2018
+-- Date: April 25, 2018
 -- Description: This is the splash screen of the game. It displays the 
 -- company logo that moves across the screen 
 -----------------------------------------------------------------------------------------
 -- hide the status bar
 display.setStatusBar(display.HiddenStatusBar)
+
+-- change the background colour
+display.setDefault ("background", 164/255, 195/255, 231/255)
 -----------------------------------------------------------------------------------------
 
 -- Use Composer Library
@@ -26,27 +29,47 @@ local scene = composer.newScene( sceneName )
 -----------------------------------------------------------------------------------------
  
 -- The local variables for this scene
-local cat
-local scrollXSpeed = -9
-local scrollYSpeed = 6
-local jungleSounds = audio.loadSound("Sounds/program .mp3")
-local laughSoundChannel
+local Rosella
+local scrollXSpeedRosella = 4
+local scrollYSpeedRosella = 0
+local jungleSounds = audio.loadSound("Sounds/horse-whinny.mp3")
+local horseSoundChannel
 
+local Rose1
+local scrollXSpeedRose1 = 6
+local scrollYSpeedRose1 = 0
+
+local Rose2
+local scrollXSpeedRose2 = 6
+local scrollYSpeedRose2 = 0
+
+local Rose3
+local scrollXSpeedRose3 = 6
+local scrollYSpeedRose3 = 0
+
+local Rose4
+local scrollXSpeedRose4 = 6
+local scrollYSpeedRose4 = 0
 --------------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
 --------------------------------------------------------------------------------------------
 
--- The function that moves the cat across the screen
-local function moveCat()
-    cat.x = cat.x + scrollXSpeed
-    cat.y = cat.y + scrollYSpeed
+-- The function that moves the Rosella across the screen
+local function moveRosella()
+    Rosella.x = Rosella.x + scrollXSpeedRosella
+    Rosella.y = Rosella.y + scrollYSpeedRosella
 end
 
--- The function that will go to the main menu 
-local function gotoMainMenu()
-    composer.gotoScene( "main_menu" )
+-- The function that moves the Rose across the screen
+local function moveRose1()
+    Rose1.x = Rose1.x + scrollXSpeedRose1
+    Rose1.y = Rose1.y + scrollYSpeedRose1
 end
 
+local function rotateRose1()
+    -- rotates Rose1
+    Rose1.rotate = 2
+end
 -----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
@@ -58,20 +81,29 @@ function scene:create( event )
     local sceneGroup = self.view
 
     -- set the background to be black
-    display.setDefault("background", 0, 0, 0)
+    display.setDefault("background", 164/255, 195/255, 231/255)
 
-    -- Insert the cat image
-    cat = display.newImageRect("Images/flyingRainbowCatThing.png", 400, 400)
+    -- Insert the Rosella image
+    Rosella = display.newImageRect("Images/CompanyLogoRosella.png", 1001, 1001)
 
-    -- set the initial x and y position of the cat
-    cat.x = 1000
-    cat.y = display.contentHeight*0.5/3
+    -- Insert the Rose1 image
+    Rose1 = display.newImageRect("Images/Rose.png", 300, 300)
+
+    -- set the initial x and y position of the Rosella
+    Rosella.x = 0
+    Rosella.y = display.contentHeight*6/10
+
+ -- set the initial x and y position of the Rose
+    Rose1.x = 0
+    Rose1.y = display.contentHeight*2/10
 
     -- Insert objects into the scene group in order to ONLY be associated with this scene
-    sceneGroup:insert( cat )
+    sceneGroup:insert( Rosella )
+
+ -- Insert objects into the scene group in order to ONLY be associated with this scene
+    sceneGroup:insert( Rose1 )
 
 end -- function scene:create( event )
-
 --------------------------------------------------------------------------------------------
 
 -- The function called when the scene is issued to appear on screen
@@ -95,12 +127,14 @@ function scene:show( event )
         -- start the splash screen music
        
 
-        -- Call the movecat function as soon as we enter the frame.
-        Runtime:addEventListener("enterFrame", moveCat)
+        -- Call the moveRosella function as soon as we enter the frame.
+        Runtime:addEventListener("enterFrame", moveRosella)
 
-        -- Go to the main menu screen after the given time.
-        timer.performWithDelay ( 3000, gotoMainMenu)          
+        -- Call the moveRose1 function as soon as we enter the frame.
+        Runtime:addEventListener("enterFrame", moveRose1)       
         
+        -- Call the rotateRose1 function as soon as we enter the frame.
+        Runtime:addEventListener("enterFrame", rotateRose1)    
     end
 
 end --function scene:show( event )
@@ -161,3 +195,5 @@ scene:addEventListener( "destroy", scene )
 -----------------------------------------------------------------------------------------
 
 return scene
+
+
