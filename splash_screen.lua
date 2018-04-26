@@ -29,27 +29,35 @@ local scene = composer.newScene( sceneName )
 -----------------------------------------------------------------------------------------
  
 -- The local variables for this scene
+
+local horseSounds = audio.loadSound("Sounds/horse-whinny.mp3")
+local horseSoundChannel
+
+-- Rosella local variables
 local Rosella
 local scrollXSpeedRosella = 4
 local scrollYSpeedRosella = 0
-local jungleSounds = audio.loadSound("Sounds/horse-whinny.mp3")
-local horseSoundChannel
 
+-- Rose1 local variables
 local Rose1
 local scrollXSpeedRose1 = 6
 local scrollYSpeedRose1 = 0
 
+-- Rose2 local variables
 local Rose2
 local scrollXSpeedRose2 = 6
 local scrollYSpeedRose2 = 0
 
+-- Rose3 local variables
 local Rose3
 local scrollXSpeedRose3 = 6
 local scrollYSpeedRose3 = 0
 
+-- Rose4 local variables
 local Rose4
 local scrollXSpeedRose4 = 6
 local scrollYSpeedRose4 = 0
+
 --------------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
 --------------------------------------------------------------------------------------------
@@ -68,7 +76,37 @@ end
 
 local function rotateRose1()
     -- rotates Rose1
-    Rose1.rotate = 2
+    Rose1.rotation = Rose1.rotation + 2 
+end
+
+local function moveRose2()
+    Rose2.x = Rose2.x + scrollXSpeedRose2
+    Rose2.y = Rose2.y + scrollYSpeedRose2
+end
+
+local function rotateRose2()
+    -- rotates Rose2
+    Rose2.rotation = Rose2.rotation + 2 
+end
+
+local function moveRose3()
+    Rose3.x = Rose3.x + scrollXSpeedRose3
+    Rose3.y = Rose3.y + scrollYSpeedRose3
+end
+
+local function rotateRose3()
+    -- rotates Rose3
+    Rose3.rotation = Rose3.rotation + 2 
+end
+
+local function moveRose4()
+    Rose4.x = Rose4.x + scrollXSpeedRose4
+    Rose4.y = Rose4.y + scrollYSpeedRose4
+end
+
+local function rotateRose4()
+    -- rotates Rose4
+    Rose4.rotation = Rose4.rotation + 2 
 end
 -----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
@@ -95,13 +133,34 @@ function scene:create( event )
 
  -- set the initial x and y position of the Rose
     Rose1.x = 0
-    Rose1.y = display.contentHeight*2/10
+    Rose1.y = display.contentHeight*1/10
+
+ -- set the initial x and y position of the Rose
+    Rose2.x = 0
+    Rose2.y = display.contentHeight*2/10
+
+ -- set the initial x and y position of the Rose
+    Rose3.x = 0
+    Rose3.y = display.contentHeight*3/10
+
+ -- set the initial x and y position of the Rose
+    Rose4.x = 0
+    Rose4.y = display.contentHeight*4/10
 
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( Rosella )
 
  -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( Rose1 )
+
+     -- Insert objects into the scene group in order to ONLY be associated with this scene
+    sceneGroup:insert( Rose2 )
+
+     -- Insert objects into the scene group in order to ONLY be associated with this scene
+    sceneGroup:insert( Rose3 )
+
+ -- Insert objects into the scene group in order to ONLY be associated with this scene
+    sceneGroup:insert( Rose4 )
 
 end -- function scene:create( event )
 --------------------------------------------------------------------------------------------
@@ -125,7 +184,7 @@ function scene:show( event )
 
     elseif ( phase == "did" ) then
         -- start the splash screen music
-       
+       audio.play(HorseSound)
 
         -- Call the moveRosella function as soon as we enter the frame.
         Runtime:addEventListener("enterFrame", moveRosella)
@@ -134,7 +193,25 @@ function scene:show( event )
         Runtime:addEventListener("enterFrame", moveRose1)       
         
         -- Call the rotateRose1 function as soon as we enter the frame.
-        Runtime:addEventListener("enterFrame", rotateRose1)    
+        Runtime:addEventListener("enterFrame", rotateRose1)
+
+        -- Call the moveRose1 function as soon as we enter the frame.
+        Runtime:addEventListener("enterFrame", moveRose2)       
+        
+        -- Call the rotateRose1 function as soon as we enter the frame.
+        Runtime:addEventListener("enterFrame", rotateRose2)    
+
+        -- Call the moveRose1 function as soon as we enter the frame.
+        Runtime:addEventListener("enterFrame", moveRose3)       
+        
+        -- Call the rotateRose1 function as soon as we enter the frame.
+        Runtime:addEventListener("enterFrame", rotateRose3)
+
+        -- Call the moveRose1 function as soon as we enter the frame.
+        Runtime:addEventListener("enterFrame", moveRose4)       
+        
+        -- Call the rotateRose1 function as soon as we enter the frame.
+        Runtime:addEventListener("enterFrame", rotateRose4)    
     end
 
 end --function scene:show( event )
