@@ -4,7 +4,7 @@
 -- Created by: Clara Mackay
 -- Date: April 25, 2018
 -- Description: This is the splash screen of the game. It displays the 
--- company logo that moves across the screen 
+-- company logo that moves across the screen. 
 -----------------------------------------------------------------------------------------
 -- hide the status bar
 display.setStatusBar(display.HiddenStatusBar)
